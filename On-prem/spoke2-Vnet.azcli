@@ -1,0 +1,78 @@
+# Create: RG, VNET (GatewaySubnet, SubnetA), VM, instal IIS
+ResourceGroup=Amsterdam
+location=swedencentral
+
+vnetName=AmsVnet
+VnetCIDR=10.2.0.0/16  #change
+GatewaySubnetCIDR=10.2.3.0/24  #change
+SubnetCIDR=10.2.2.0/27  #change
+subnetname=subnet
+GatewaySubnet=GatewaySubnet
+
+VMname=$vnetName-vm
+username=demousr
+password=Password@123
+image=Win2022Datacenter 
+# image=UbuntuLTS
+
+if [[ $(az group list --query "[?location==$location].name" | sed 's/[][", ]//g') = *"$ResourceGroup"* ]]; then
+    echo "This is ResourceGroup: ${ResourceGroup} exits"
+else
+    echo "creating ${ResourceGroup} ResourceGroup"
+az group create --name $ResourceGroup --location $location
+fi
+
+# az group create --name $ResourceGroup --location $location
+
+if [[ $(az network vnet show -g $ResourceGroup --name $vnetName --query "name" | sed 's/[][", ]//g') = $vnetName ]]; then
+    echo "This is ${vnetName} exits"
+else
+    echo "creating ${vnetName}"
+az network vnet create --name $vnetName --resource-group $ResourceGroup --address-prefixes $VnetCIDR
+fi
+
+if [[ $(az network vnet subnet show --name $subnetname --vnet-name $vnetName -g $ResourceGroup --query "name" | sed 's/[][", ]//g') = $subnetname ]]; then
+    echo "This is ${subnetname} exits"
+else
+    echo "creating subnet"
+az network vnet subnet create -g $ResourceGroup --vnet-name $vnetName -n $subnetname --address-prefixes $SubnetCIDR
+fi
+
+if [[ $(az network vnet subnet show --name $GatewaySubnet --vnet-name $vnetName -g $ResourceGroup --query "name" | sed 's/[][", ]//g') = $GatewaySubnet ]]; then
+    echo "This is ${GatewaySubnet} exits"
+else
+    echo "creating subnet"
+az network vnet subnet create -g $ResourceGroup --vnet-name $vnetName -n $GatewaySubnet --address-prefixes $GatewaySubnetCIDR
+fi
+#Create VM
+if [[ $(az vm show -g $ResourceGroup -n $VMname --query "*.computerName" | sed 's/[][", ]//g') = *"$VMname"* ]]; then
+    echo "This is ${VMname} exist"
+else
+    echo "This is WindowsFeature vm"
+az vm create --resource-group $ResourceGroup -n $VMname --image $image --admin-username $username --admin-password $password \
+    --subnet $subnetname --vnet-name $vnetName --public-ip-sku Standard --generate-ssh-keys
+az vm run-command invoke -g $ResourceGroup -n $VMname --command-id RunPowerShellScript \
+        --scripts 'Add-WindowsFeature Web-Server' 'Set-Content -Path "C:\inetpub\wwwroot\Default.html" -Value "This is the server $($env:computername) !"'
+fi
+
+#Create Linux vm
+if [[ $(az vm show --resource-group $ResourceGroup -n $VMname --query "*.osDisk.osType" | sed 's/[][", ]//g') = Linux ]]; then
+    echo "This is Linux vm"
+az vm run-command invoke -g $ResourceGroup -n $VMname --command-id RunShellScript --scripts "apt-get update && apt-get install -y nginx"
+else
+    echo "This is WindowsFeature vm"
+fi
+
+echo "Opening port 80"
+az vm open-port --port 80 -g $ResourceGroup --name $VMname
+az vm list-ip-addresses -g $ResourceGroup  -n $VMname --query "[].virtualMachine.[*.publicIpAddresses]"
+
+# Extra Virtual Machine
+# az vm create --resource-group $ResourceGroup --location $location -n "web-server" --image $image --admin-username $username --admin-password $password \
+#     --subnet $subnetname --vnet-name $vnetName --public-ip-sku Standard --generate-ssh-keys
+# az vm run-command invoke -g $ResourceGroup -n web-server --command-id RunPowerShellScript \
+#         --scripts 'Add-WindowsFeature Web-Server' 'Set-Content -Path "C:\inetpub\wwwroot\Default.html" -Value "This is the server $($env:computername) !"'
+# az vm open-port --port 80 -g $ResourceGroup --name web-server
+# az vm list-ip-addresses -g $ResourceGroup  -n web-server --query "[].virtualMachine.[*.publicIpAddresses]"
+
+#az vm create --resource-group contosoRGTwo --location NorthEurope -n "web-server" --image Win2022Datacenter --admin-username demousr --admin-password Password@123 --subnet subnet --vnet-name Vnet1 --public-ip-sku Standard --generate-ssh-keys
