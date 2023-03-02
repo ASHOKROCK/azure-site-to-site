@@ -1,5 +1,7 @@
 # Azure-site-to-site
-## Pre-requsites
+# Network diagram
+![diagram](NetworkDesign.png)
+## Prerequsites
 - [terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 - [azure cli](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
 
@@ -21,15 +23,14 @@ SubnetCIDR=10.1.2.0/24
    -  ./spoke1-Vnet.azcli
    -  ./spoke2-Vnet.azcli
 
-2. Copy the public ip's of both VM's
-3. These ip's are required for VPN setp
-4. execute below cmd:
-   - terraform init
+2. From spokes Vnets. Copy the public ip's of both VM's. You get as output after execution.
+3. These ip's are required for VPN setup
+4. execute below cmds: (If you are in root dir: site-to-site-terrafrom)
+   - terraform init or terraform init -upgrade
    - terraform plan
    - terraform apply
 
-# Network diagram
-![diagram](NetworkDesign.png)
+
 
 
 
