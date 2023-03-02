@@ -23,3 +23,14 @@ SubnetCIDR=10.1.2.0/24
 
 2. Copy the public ip's of both VM's
 3. These ip's are required for VPN setp
+4. execute below cmd:
+   - terraform init
+   - terraform plan
+   - terraform apply
+
+# Network diagram
+![diagram](NetworkDesign.png)
+
+
+
+
