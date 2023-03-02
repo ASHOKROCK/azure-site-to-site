@@ -1,2 +1,3 @@
-debug.log
 .terraform
+.DS_store
+providers
