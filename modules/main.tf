@@ -13,7 +13,7 @@ resource "azurerm_resource_group" "rg" {
 # Create virtual network
 resource "azurerm_virtual_network" "vnet_work" {
   name                = var.vnet_config["vnetname"]
-  address_space       = var.vnet_cidr
+  address_space       = ["${var.vnet_cidr}"]
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 }
@@ -23,7 +23,7 @@ resource "azurerm_subnet" "vnet_public_subnet" {
   name                 = var.vnet_config["public_subnet"]
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.vnet_work.name
-  address_prefixes     = var.public_subnet_address
+  address_prefixes     = ["${var.public_subnet_address}"]
 }
 
 # Create private subnet
@@ -31,7 +31,7 @@ resource "azurerm_subnet" "vnet_private_subnet" {
   name                 = var.vnet_config["private_subnet"]
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.vnet_work.name
-  address_prefixes     = var.private_subnet_address
+  address_prefixes     = ["${var.private_subnet_address}"]
 }
 
 # Create Network Security Group and rule
@@ -133,7 +133,7 @@ resource "azurerm_subnet" "vnet_gateway_subnet" {
   name                 = "GatewaySubnet"
   resource_group_name = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.vnet_work.name
-  address_prefixes     = var.gateway_subnet_address
+  address_prefixes     = ["${var.gateway_subnet_address}"]
 }
 resource "azurerm_public_ip" "GatewaySubnetPublicIp" {
   name                = "GatewaySubnetPublicIp"
@@ -161,45 +161,45 @@ resource "azurerm_virtual_network_gateway" "VirtualNetworkGateway" {
 }
 
 # Local network Gateway
-resource "azurerm_local_network_gateway" "onpremise_ireland" {
-  name                = "onpremise_ireland"
+resource "azurerm_local_network_gateway" "onpremise_spoke1" {
+  name                = "onpremise_spoke1"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  gateway_address     = "20.160.37.196"
-  address_space       = ["10.1.0.0/16"] #local network cidr
+  gateway_address     = var.spoke1_Vm_pip
+  address_space       = ["${var.spoke1cidr}"] #local network cidr
 }
 
 # Local network Gateway2
-resource "azurerm_local_network_gateway" "onpremise_amsterdam" {
-  name                = "onpremise_amsterdam"
+resource "azurerm_local_network_gateway" "onpremise_spoke2" {
+  name                = "onpremise_spoke2"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  gateway_address     = "20.91.218.15"
-  address_space       = ["10.2.0.0/16"] #local network cidr
+  gateway_address     = var.spoke2_Vm_pip
+  address_space       = ["${var.spoke2cidr}"] #local network cidr
 }
 
-# Site to site VPN ireland, connect lgw to vpn gateway
-resource "azurerm_virtual_network_gateway_connection" "vng_connection_onpremise_ireland" {
-  name                = "vng_connection_onpremise_ireland"
+# Site to site VPN spoke1, connect lgw to vpn gateway
+resource "azurerm_virtual_network_gateway_connection" "vng_connection_onpremise_spoke1" {
+  name                = "vng_connection_onpremise_spoke2"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 
   type                       = "IPsec"
   virtual_network_gateway_id = azurerm_virtual_network_gateway.VirtualNetworkGateway.id
-  local_network_gateway_id   = azurerm_local_network_gateway.onpremise_ireland.id
+  local_network_gateway_id   = azurerm_local_network_gateway.onpremise_spoke1.id
 
   shared_key = "abc@143"
 }
 
-# Site to site VPN amsterdam, connect lgw to vpn gateway
-resource "azurerm_virtual_network_gateway_connection" "vng_connection_onpremise_amsterdam" {
-  name                = "vng_connection_onpremise_amsterdam"
+# Site to site VPN spoke2, connect lgw to vpn gateway
+resource "azurerm_virtual_network_gateway_connection" "vng_connection_onpremise_spoke2" {
+  name                = "vng_connection_onpremise_spoke2"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 
   type                       = "IPsec"
   virtual_network_gateway_id = azurerm_virtual_network_gateway.VirtualNetworkGateway.id
-  local_network_gateway_id   = azurerm_local_network_gateway.onpremise_amsterdam.id
+  local_network_gateway_id   = azurerm_local_network_gateway.onpremise_spoke2.id
 
   shared_key = "abc@143"
 }

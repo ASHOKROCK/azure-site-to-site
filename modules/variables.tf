@@ -18,17 +18,34 @@ variable "vnet_config" {
     }
 }
 variable "vnet_cidr" {
-  default = ["10.6.0.0/16"]
+  type = string
+  description = "azure vnet cidr"
 }
 variable "public_subnet_address" {
-  default = ["10.6.1.0/24"]
+  type = string
 }
 variable "private_subnet_address" {
-  default = ["10.6.2.0/24"]
+  type = string
 }
 variable "gateway_subnet_address" {
-  default = ["10.6.3.0/24"]
+  type = string
 }
+
+# On-prem values
+variable "spoke1cidr" {
+  type = string
+}
+variable "spoke2cidr" {
+  type = string
+}
+
+variable "spoke1_Vm_pip" {
+}
+
+variable "spoke2_Vm_pip" {
+
+}
+
 
 # variable "script" {
 #   default     = "Add-WindowsFeature Web-Server"

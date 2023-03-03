@@ -11,19 +11,22 @@ This repo contains two spoke accounts (simulated on-prem network) with respectiv
 
 change below parameters acc to your needs or keep default.
 ```
-ResourceGroup=ire-rg
-location=westeurope
-
-vnetName=IreVnet
-VnetCIDR=10.1.0.0/16  
-GatewaySubnetCIDR=10.1.3.0/24
-SubnetCIDR=10.1.2.0/24
+  resource_group_location = "centralindia"
+  vnet_cidr = "10.6.0.0/16"
+  public_subnet_address = "10.6.1.0/24"
+  private_subnet_address = "10.6.2.0/24"
+  gateway_subnet_address = "10.6.3.0/24"
+  # Simulated on-prem details
+  spoke1cidr = "10.1.0.0/16" 
+  spoke2cidr = "10.2.0.0/16"
+  spoke1_Vm_pip = "87.49.45.xxx" 
+  spoke2_Vm_pip = "87.49.45.xx"
 ```
 1. execute the spokes in terminal (copy and paste):
    -  ./spoke1-Vnet.azcli
    -  ./spoke2-Vnet.azcli
 
-2. From spokes Vnets. Copy the public ip's of both VM's. You get as output after execution.
+2. From spokes Vnets. **Copy** the public **public ip's** of both VM's. You get as output after execution.
 3. These ip's are required for VPN setup
 4. execute below cmds: (If you are in root dir: site-to-site-terrafrom)
    - terraform init or terraform init -upgrade
