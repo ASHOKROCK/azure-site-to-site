@@ -10,5 +10,5 @@ module "module_dev" {
   spoke1cidr = "10.1.0.0/16" 
   spoke2cidr = "10.2.0.0/16"
   spoke1_Vm_pip = "87.49.45.127" 
-  spoke2_Vm_pip = "87.49.45.127"
+  spoke2_Vm_pip = "87.49.45.128"
 }

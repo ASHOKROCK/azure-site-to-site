@@ -12,7 +12,7 @@ resource "azurerm_resource_group" "rg" {
 
 # Create virtual network
 resource "azurerm_virtual_network" "vnet_work" {
-  name                = var.vnet_config["vnetname"]
+  name                = "CoreServiceNet"
   address_space       = ["${var.vnet_cidr}"]
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
@@ -20,7 +20,7 @@ resource "azurerm_virtual_network" "vnet_work" {
 
 # Create public subnet
 resource "azurerm_subnet" "vnet_public_subnet" {
-  name                 = var.vnet_config["public_subnet"]
+  name                 = "public_subnet"
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.vnet_work.name
   address_prefixes     = ["${var.public_subnet_address}"]
@@ -28,7 +28,7 @@ resource "azurerm_subnet" "vnet_public_subnet" {
 
 # Create private subnet
 resource "azurerm_subnet" "vnet_private_subnet" {
-  name                 = var.vnet_config["private_subnet"]
+  name                 = "private_subnet"
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.vnet_work.name
   address_prefixes     = ["${var.private_subnet_address}"]
@@ -45,7 +45,7 @@ resource "azurerm_network_security_group" "nsg" {
     priority                   = 1002
     direction                  = "Inbound"
     access                     = "Allow"
-    protocol                   = "TCP"
+    protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "80"
     source_address_prefix      = "*"
@@ -56,7 +56,7 @@ resource "azurerm_network_security_group" "nsg" {
     priority                   = 1003
     direction                  = "Inbound"
     access                     = "Allow"
-    protocol                   = "TCP"
+    protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "3389"
     source_address_prefix      = "*"
@@ -147,7 +147,7 @@ resource "azurerm_virtual_network_gateway" "VirtualNetworkGateway" {
   name                = "VirtualNetworkGateway"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  type                = "VPN"
+  type                = "Vpn"
   vpn_type            = "RouteBased"
   sku                 = "Standard"
   enable_bgp          = true
@@ -180,7 +180,7 @@ resource "azurerm_local_network_gateway" "onpremise_spoke2" {
 
 # Site to site VPN spoke1, connect lgw to vpn gateway
 resource "azurerm_virtual_network_gateway_connection" "vng_connection_onpremise_spoke1" {
-  name                = "vng_connection_onpremise_spoke2"
+  name                = "vng_connection_onpremise_spoke1"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 
