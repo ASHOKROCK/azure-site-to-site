@@ -62,6 +62,7 @@ Finish -> start service
 ![](/pics/AzureInterface.png)
 
 -> Next
+
 ![](/pics/DestinationAddress.png)
 
 -> In Protocols and Security: Route IP packets on this interface -> Next -> Static Routes for Remote Networks -> click: add -> Destination: 10.0.0.0/16 (i,e cloud cidr), Network Mask: 255.255.0.0 -> Metric: 16
