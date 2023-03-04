@@ -37,10 +37,8 @@ change below parameters acc to your needs or keep default. **Note**: Change the 
 
 If fails, try to execute: *terraform init -upgrade* on terminal and execute cmd: *terraform apply --auto-approve*
 
-
-
-#OnPrem PC
--> Goto on-prem (Local Server e.g: windows server 2022)
+# OnPrem side (i,e simulated local network)
+Goto (login) on-prem (Local Server e.g: windows server 2022)
 -> Goto server manager.
 -> Add roles -> Remote Access -> click: next -> next -> tick: DirectAccess and VPN (RAS), Routing -> Install
 
@@ -62,6 +60,7 @@ Finish -> start service
 -> Interface name: Azure -> connection Type: Connect using virtual private networking (VPN) -> VPN Type: IKEv2 -> Destination Address: Virtual Network Gateway Public IP address
 
 ![](/pics/AzureInterface.png)
+
 -> Next
 ![](/pics/DestinationAddress.png)
 
@@ -75,8 +74,9 @@ Finish -> start service
 ![](/pics/AzureProperties.png)
 
 ![](/pics/connect.png)
+
 -> Check the status in Azure: Connections under Virtual Network Gateway
-Goto -> Virtuanl Network Gateway (VPN Gateway) -> On left side click: connections
+Goto -> Virtuanl Network Gateway (VPN Gateway) -> On left side click: connections.
 
 ![](/pics/VPNGW-connection.png)
 
