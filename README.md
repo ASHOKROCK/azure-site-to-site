@@ -14,14 +14,14 @@ This repo contains two spoke accounts (simulated on-prem network) with respectiv
    -  ./spoke1-Vnet.azcli
    -  ./spoke2-Vnet.azcli
 
-2. From spokes Vnets. **Copy** the public **public ip's** of both VM's. You get as output after execution.
-3. These ip's are required for VPN setup
+2. From spokes Vnets. **Copy** the public **public ip's** of both VM's. You get in output after execution.
+3. These ip's (acts as network virtual appliance) are required for VPN setup in later sec
 4. execute below cmds: (If you are in root dir: site-to-site-terrafrom)
    - terraform init
    - terraform plan
    - terraform apply
 
-change below parameters acc to your needs or keep default. **Note**: Change the *spoke1_Vm_pip* and *poke2_Vm_pip*
+change below parameters acc to your needs or keep default. **Note**: Change the *spoke1_Vm_pip* and *spoke2_Vm_pip*
 ```
   resource_group_location = "centralindia"
   vnet_cidr = "10.6.0.0/16"
