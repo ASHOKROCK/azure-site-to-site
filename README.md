@@ -57,15 +57,13 @@ Finish -> start service
 
 
 -> add: New Demand-dial interface
--> Interface name: Azure -> connection Type: Connect using virtual private networking (VPN) -> VPN Type: IKEv2 -> Destination Address: Virtual Network Gateway Public IP address
+-> Interface name: Azure -> connection Type: Connect using virtual private networking (VPN) -> VPN Type: IKEv2 -> Destination Address: public ip (Virtual Network Gateway Public IP address) shown in below pic.
 
 ![](/pics/AzureInterface.png)
 
--> Next
-
 ![](/pics/DestinationAddress.png)
 
--> In Protocols and Security: Route IP packets on this interface -> Next -> Static Routes for Remote Networks -> click: add -> Destination: 10.0.0.0/16 (i,e cloud cidr), Network Mask: 255.255.0.0 -> Metric: 16
+-> In Protocols and Security: Route IP packets on this interface -> Next -> Static Routes for Remote Networks -> click: add -> Destination: 10.0.0.0/16 (i,e cloud Vnet cidr), Network Mask: 255.255.0.0 -> Metric: 16
 ![](/pics/StaticRouteForRemoteNetworks.png)
 
 
