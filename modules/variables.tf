@@ -1,6 +1,5 @@
 variable "resource_group_location" {
   default     = "northeurope"
-  resource_group_location = "centralindia"
   description = "Location of the resource group."
 }
 

@@ -1,4 +1,6 @@
 # Azure-site-to-site
+## Scope
+Implement mulit-site S2S vpn.
 # Network diagram
 ![diagram](/pics/NetworkDesign.png)
 ## Prerequsites
@@ -15,13 +17,13 @@ This repo contains two spoke accounts (simulated on-prem network) with respectiv
    -  ./spoke2-Vnet.azcli
 
 2. From spokes Vnets. **Copy** the public **public ip's** of both VM's. You get in output after execution.
-3. These ip's (acts as network virtual appliance) are required for VPN setup in later sec
-4. execute below cmds: (If you are in root dir: site-to-site-terrafrom)
+3. These VM ip's (acts as network virtual appliance) are required for VPN setup in later sec
+4. execute below cmds: (Goto dir: /site-to-site-terrafrom)
    - terraform init
    - terraform plan
    - terraform apply
 
-change below parameters acc to your needs or keep default. **Note**: Change the *spoke1_Vm_pip* and *spoke2_Vm_pip*
+change below parameters acc to your needs or keep default. **Note**: Change the *spoke1_Vm_pip* and *spoke2_Vm_pip* (use vm ips copied from above steps)
 ```
   resource_group_location = "centralindia"
   vnet_cidr = "10.6.0.0/16"
@@ -35,10 +37,10 @@ change below parameters acc to your needs or keep default. **Note**: Change the 
   spoke2_Vm_pip = "87.49.45.xx"
 ```
 
-If fails, try to execute: *terraform init -upgrade* on terminal and execute cmd: *terraform apply --auto-approve*
+**Note**: If fails, try to execute: *terraform init -upgrade* on terminal and execute cmd: *terraform apply --auto-approve*
 
 # OnPrem side (i,e simulated local network)
-Goto (login) on-prem (Local Server e.g: windows server 2022)
+Goto (rdp login) on-prem (Local Server e.g: windows server 2022)
 -> Goto server manager.
 -> Add roles -> Remote Access -> click: next -> next -> tick: DirectAccess and VPN (RAS), Routing -> Install
 
