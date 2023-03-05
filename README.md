@@ -42,6 +42,8 @@ This repo contains two spoke accounts (simulated on-prem network) with respectiv
 
 # OnPrem side (i,e simulated local network)
 Goto (rdp login) on-prem (Local Server e.g: windows server 2022)
+- username: demousr
+- password: Password@123
 -> Goto server manager.
 -> Add roles -> Remote Access -> click: next -> next -> tick: DirectAccess and VPN (RAS), Routing -> Install
 
