@@ -18,14 +18,9 @@ This repo contains two spoke accounts (simulated on-prem network) with respectiv
 
 2. From spokes Vnets. **Copy** the public **public ip's** of both VM's. You get in output after execution.
 3. These VM ip's (acts as network virtual appliance) are required for VPN setup in later sec
-4. execute below cmds: (Goto dir: /site-to-site-terrafrom)
-   - terraform init
-   - terraform plan
-   - terraform apply
-
-change below parameters acc to your needs or keep default. **Note**: Change the *spoke1_Vm_pip* and *spoke2_Vm_pip* (use vm ips copied from above steps)
+4. Change below parameters acc to your needs or keep default. **Note**: Change the *spoke1_Vm_pip* and *spoke2_Vm_pip* (use vm ips copied from above steps)
 ```
-  resource_group_location = "centralindia"
+  resource_group_location = "northeurope"
   vnet_cidr = "10.6.0.0/16"
   public_subnet_address = "10.6.1.0/24"
   private_subnet_address = "10.6.2.0/24"
@@ -36,6 +31,12 @@ change below parameters acc to your needs or keep default. **Note**: Change the 
   spoke1_Vm_pip = "87.49.45.xxx" 
   spoke2_Vm_pip = "87.49.45.xx"
 ```
+5. execute below cmds: (Goto dir: /site-to-site-terrafrom)
+   - terraform init
+   - terraform plan
+   - terraform apply
+
+
 
 **Note**: If fails, try to execute: *terraform init -upgrade* on terminal and execute cmd: *terraform apply --auto-approve*
 
