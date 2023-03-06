@@ -46,7 +46,7 @@ Goto (rdp login) on-prem (Local Server e.g: windows server 2022)
 - password: Password@123
   
 -> Goto Server Manager Dashboard.
--> Drop down **Manage** on top right corner. click: Add roles-> Installation Typer: Role-based or feature-based installation -> click: Next -> Remote Access -> click: next -> next -> tick: DirectAccess and VPN (RAS), Routing -> Install
+-> Drop down **Manage** on top right corner. click: Add roles-> Installation Type: Role-based or feature-based installation -> click: Next -> Remote Access -> click: next -> next -> tick: DirectAccess and VPN (RAS), Routing -> Install
 
 After installation the Roles -> click on Flag (On top right corner) -> Open the Getting Started Wizard -> Choose: Deploy VPN only
 
@@ -74,7 +74,8 @@ Finish -> start service
 
 
 ->Dail-Out Credentials (Optional) -> Finish
--> Select: Azure Network Interface -> Go to properties -> click security -> choose: Use preshared key for authentication -> type: keyname (e.g: abc 123 (this key is from connections in Virtual Network Gateway))
+-> Select: Azure Network Interface -> Go to properties -> click security -> choose: Use preshared key for authentication -> type: keyname (e.g: abc@143 (this key is from connections in Virtual Network Gateway))
+Note: In the above code Preshared Key is: abc@143
 
 ![](/pics/AzureProperties.png)
 
