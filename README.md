@@ -18,7 +18,7 @@ This repo contains two spoke accounts (simulated on-prem network) with respectiv
 
 2. Navigate to your Virtual Machines for public ip's.
 3. Copy these VM (acts as network virtual appliance) public ip's, required for VPN setup in later section.
-4. Clone this [repo](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) and change below parameters  or keep default. **Note**: Change the *spoke1_Vm_pip* and *spoke2_Vm_pip* (use vm ips copied from above steps)
+4. Clone this repo and change below parameters  or keep default. **Note**: Change the *spoke1_Vm_pip* and *spoke2_Vm_pip* (use vm ips copied from above steps)
 ```
   resource_group_location = "northeurope"
   vnet_cidr = "10.6.0.0/16"
@@ -31,7 +31,7 @@ This repo contains two spoke accounts (simulated on-prem network) with respectiv
   spoke1_Vm_pip = "87.49.45.xxx" 
   spoke2_Vm_pip = "87.49.45.xx"
 ```
-5. execute below cmds: (Goto dir: /site-to-site-terrafrom)
+1. execute below cmds: (Goto dir: /site-to-site-terrafrom)
    - terraform init
    - terraform plan
    - terraform apply
