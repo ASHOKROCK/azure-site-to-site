@@ -5,7 +5,7 @@ Implement mulit-site S2S vpn.
 ![diagram](/pics/NetworkDesign.png)
 ## Prerequsites
 - [terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
-- [azure cli](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
+- [azure cli](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli) & [sign in](https://learn.microsoft.com/en-us/cli/azure/authenticate-azure-cli)
 
 This repo contains two spoke accounts (simulated on-prem network) with respective parameters.
 - spoke1 ([spoke1-Vnet.azcli](./On-prem/spoke1-Vnet.azcli))
