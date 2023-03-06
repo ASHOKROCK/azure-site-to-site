@@ -75,7 +75,7 @@ Finish -> start service
 
 ->Dail-Out Credentials (Optional) -> Finish
 -> Select: Azure Network Interface -> Go to properties -> click security -> choose: Use preshared key for authentication -> type: keyname (e.g: abc@143 (this key is from connections in Virtual Network Gateway))
-Note: In the above code Preshared Key is: abc@143
+**Note**: In this terraform code Preshared Key is: abc@143
 
 ![](/pics/AzureProperties.png)
 
