@@ -12,13 +12,13 @@ This repo contains two spoke accounts (simulated on-prem network) with respectiv
 - spoke2 ([spoke1-Vnet.azcli](./On-prem/spoke1-Vnet.azcli))
 
 
-1. execute the spokes in terminal (copy and paste):
+1. Create the spoke Vnets. Copy and paste below commands in termianl:
    -  ./spoke1-Vnet.azcli
    -  ./spoke2-Vnet.azcli
 
-2. From spokes Vnets. **Copy** the public **public ip's** of both VM's. You get in output after execution.
-3. These VM ip's (acts as network virtual appliance) are required for VPN setup in later sec
-4. Change below parameters acc to your needs or keep default. **Note**: Change the *spoke1_Vm_pip* and *spoke2_Vm_pip* (use vm ips copied from above steps)
+2. Navigate to your Virtual Machines for public ip's.
+3. Copy these VM (acts as network virtual appliance) public ip's, required for VPN setup in later section.
+4. Clone this [repo](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) and change below parameters  or keep default. **Note**: Change the *spoke1_Vm_pip* and *spoke2_Vm_pip* (use vm ips copied from above steps)
 ```
   resource_group_location = "northeurope"
   vnet_cidr = "10.6.0.0/16"
@@ -44,8 +44,9 @@ This repo contains two spoke accounts (simulated on-prem network) with respectiv
 Goto (rdp login) on-prem (Local Server e.g: windows server 2022)
 - username: demousr
 - password: Password@123
--> Goto server manager.
--> Add roles -> Remote Access -> click: next -> next -> tick: DirectAccess and VPN (RAS), Routing -> Install
+  
+-> Goto Server Manager Dashboard.
+-> Drop down **Manage** on top right corner. click: Add roles-> Installation Typer: Role-based or feature-based installation -> click: Next -> Remote Access -> click: next -> next -> tick: DirectAccess and VPN (RAS), Routing -> Install
 
 After installation the Roles -> click on Flag (On top right corner) -> Open the Getting Started Wizard -> Choose: Deploy VPN only
 
