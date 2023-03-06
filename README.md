@@ -87,7 +87,7 @@ Goto -> Virtuanl Network Gateway (VPN Gateway) -> On left side click: connection
 ![](/pics/VPNGW-connection.png)
 
 The update will take sometime.
-- Open browser enter destination VM private ip over S2S.
+- Open browser enter destination VM private ip to see Microsoft default page over S2S.
 
 Links: 
 - [https://learn.microsoft.com/en-us/azure/vpn-gateway/tutorial-create-gateway-portal](https://learn.microsoft.com/en-us/azure/vpn-gateway/tutorial-create-gateway-portal)
