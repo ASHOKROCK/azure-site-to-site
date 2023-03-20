@@ -45,44 +45,44 @@ Goto (rdp login) on-prem (Local Server e.g: windows server 2022)
 - username: demousr
 - password: Password@123
   
--> Goto Server Manager Dashboard.
--> Drop down **Manage** on top right corner. click: Add roles-> Installation Type: Role-based or feature-based installation -> click: Next -> Remote Access -> click: next -> next -> tick: DirectAccess and VPN (RAS), Routing -> Install
+→ Goto Server Manager Dashboard.
+→ Drop down **Manage** on top right corner. click: Add roles→ Installation Type: Role-based or feature-based installation → click: Next → Remote Access → click: next → next → tick: DirectAccess and VPN (RAS), Routing → Install
 
-After installation the Roles -> click on Flag (On top right corner) -> Open the Getting Started Wizard -> Choose: Deploy VPN only
+After installation the Roles → click on Flag (On top right corner) → Open the Getting Started Wizard → Choose: Deploy VPN only
 
 ![](/pics/Routing-and-Remote-Access.png)
 
--> Configure and Enable Routing and Remote Access
--> next -> Choose: Custom configuration -> select: Demand-dial connections (used for branch office routing), LAN routing, VPN access.
+→ Configure and Enable Routing and Remote Access
+→ next → Choose: Custom configuration → select: Demand-dial connections (used for branch office routing), LAN routing, VPN access.
 ![](/pics/Demand-dial-connections.png)
 
-Finish -> start service
+Finish → start service
 
--> click: computerName as shown in below pic.
+→ click: computerName as shown in below pic.
 ![](/pics/Demand-dail-Interface.png)
 
 
--> add: New Demand-dial interface
--> Interface name: Azure -> connection Type: Connect using virtual private networking (VPN) -> VPN Type: IKEv2 -> Destination Address: public ip (Virtual Network Gateway Public IP address) shown in below pic.
+→ add: New Demand-dial interface
+→ Interface name: Azure → connection Type: Connect using virtual private networking (VPN) → VPN Type: IKEv2 → Destination Address: public ip (Virtual Network Gateway Public IP address) shown in below pic.
 
 ![](/pics/AzureInterface.png)
 
 ![](/pics/DestinationAddress.png)
 
--> In Protocols and Security: Route IP packets on this interface -> Next -> Static Routes for Remote Networks -> click: add -> Destination: 10.0.0.0/16 (i,e cloud Vnet cidr), Network Mask: 255.255.0.0 -> Metric: 16
+→ In Protocols and Security: Route IP packets on this interface → Next → Static Routes for Remote Networks → click: add → Destination: 10.0.0.0/16 (i,e cloud Vnet cidr), Network Mask: 255.255.0.0 → Metric: 16
 ![](/pics/StaticRouteForRemoteNetworks.png)
 
 
-->Dail-Out Credentials (Optional) -> Finish
--> Select: Azure Network Interface -> Go to properties -> click security -> choose: Use preshared key for authentication -> type: keyname (e.g: abc@143 (this key is from connections in Virtual Network Gateway))
+→Dail-Out Credentials (Optional) → Finish
+→ Select: Azure Network Interface → Go to properties → click security → choose: Use preshared key for authentication → type: keyname (e.g: abc@143 (this key is from connections in Virtual Network Gateway))
 **Note**: In this terraform code Preshared Key is: abc@143
 
 ![](/pics/AzureProperties.png)
 
 ![](/pics/connect.png)
 
--> Check the status in Azure: Connections under Virtual Network Gateway
-Goto -> Virtuanl Network Gateway (VPN Gateway) -> On left side click: connections.
+→ Check the status in Azure: Connections under Virtual Network Gateway
+Goto → Virtuanl Network Gateway (VPN Gateway) → On left side click: connections.
 
 ![](/pics/VPNGW-connection.png)
 
