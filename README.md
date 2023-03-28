@@ -36,7 +36,7 @@ This repo contains two spoke Vnets (simulated on-prem network) in On-prem folder
   spoke1_Vm_pip = "87.49.45.xxx" 
   spoke2_Vm_pip = "87.49.45.xx"
 ```
-1. execute below cmds: (Goto dir: /site-to-site-terrafrom)
+2. execute below cmds: (Goto dir: /site-to-site-terrafrom)
   
 ```terraform
   terraform init
