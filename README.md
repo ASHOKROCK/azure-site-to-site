@@ -19,7 +19,7 @@ This repo contains two spoke accounts (simulated on-prem network) with respectiv
 2. Navigate to your Virtual Machines for public ip's.
 3. Copy these VM (acts as network virtual appliance) public ip's, required for VPN setup in later section.
 4. Clone this repo and change below parameters  or keep default. **Note**: Change the *spoke1_Vm_pip* and *spoke2_Vm_pip* (use vm ips copied from above steps)
-```
+```azcli
   resource_group_location = "northeurope"
   vnet_cidr = "10.6.0.0/16"
   public_subnet_address = "10.6.1.0/24"
@@ -32,10 +32,11 @@ This repo contains two spoke accounts (simulated on-prem network) with respectiv
   spoke2_Vm_pip = "87.49.45.xx"
 ```
 1. execute below cmds: (Goto dir: /site-to-site-terrafrom)
-   - terraform init
-   - terraform plan
-   - terraform apply
-
+  
+```terraform
+  terraform init
+  terraform apply
+```
 
 
 **Note**: If fails, try to execute: *terraform init -upgrade* on terminal and execute cmd: *terraform apply --auto-approve*
@@ -87,7 +88,7 @@ Goto → Virtuanl Network Gateway (VPN Gateway) → On left side click: connecti
 ![](/pics/VPNGW-connection.png)
 
 The update will take sometime.
-- Open browser enter destination VM private ip to see Microsoft default page over S2S.
+- Connect VM, open browser enter destination VM private ip to see Microsoft default page over S2S.
 
 Links: 
 - [https://learn.microsoft.com/en-us/azure/vpn-gateway/tutorial-create-gateway-portal](https://learn.microsoft.com/en-us/azure/vpn-gateway/tutorial-create-gateway-portal)
