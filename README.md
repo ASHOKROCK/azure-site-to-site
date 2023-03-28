@@ -7,7 +7,7 @@ Implement mulit-site S2S vpn.
 - [terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 - [azure cli](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli) & [sign in](https://learn.microsoft.com/en-us/cli/azure/authenticate-azure-cli)
 
-This repo contains two spoke Vnets (simulated on-prem network) with respective parameters.
+This repo contains two spoke Vnets (simulated on-prem network) in On-prem folder. 
 - spoke1 ([spoke1-Vnet.azcli](./On-prem/spoke1-Vnet.azcli))
 - spoke2 ([spoke1-Vnet.azcli](./On-prem/spoke1-Vnet.azcli))
 
@@ -15,7 +15,7 @@ This repo contains two spoke Vnets (simulated on-prem network) with respective p
 
 ### Create (on-prem) spokes
 
-1. Create two spoke Vnets. execute below commands in terminal:
+1. Create two spoke Vnets. execute below commands in terminal on the file path. Login to your Azure portal using azure cli.
    -  ./spoke1-Vnet.azcli
    -  ./spoke2-Vnet.azcli
 
@@ -36,7 +36,7 @@ This repo contains two spoke Vnets (simulated on-prem network) with respective p
   spoke1_Vm_pip = "87.49.45.xxx" 
   spoke2_Vm_pip = "87.49.45.xx"
 ```
-2. execute below cmds: (Goto dir: /site-to-site-terrafrom)
+1. execute below cmds: (Goto dir: /site-to-site-terrafrom)
   
 ```terraform
   terraform init
