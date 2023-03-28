@@ -12,13 +12,14 @@ This repo contains two spoke accounts (simulated on-prem network) with respectiv
 - spoke2 ([spoke1-Vnet.azcli](./On-prem/spoke1-Vnet.azcli))
 
 
-1. Create the spoke Vnets. Copy and paste below commands in termianl:
+1. Create the spoke Vnets. execute below commands in terminal:
    -  ./spoke1-Vnet.azcli
    -  ./spoke2-Vnet.azcli
 
 2. Navigate to your Virtual Machines for public ip's.
-3. Copy these VM (acts as network virtual appliance) public ip's, required for VPN setup in later section.
-4. Clone this repo and change below parameters  or keep default. **Note**: Change the *spoke1_Vm_pip* and *spoke2_Vm_pip* (use vm ips copied from above steps)
+3. Copy VM's (acts as network virtual appliance) public ip, required for VPN setup in later section.
+4. Clone this repo and change below parameters. 
+> **Note**: Change the *spoke1_Vm_pip* and *spoke2_Vm_pip* (use vm ips copied from above steps)
 ```azcli
   resource_group_location = "northeurope"
   vnet_cidr = "10.6.0.0/16"
@@ -39,17 +40,17 @@ This repo contains two spoke accounts (simulated on-prem network) with respectiv
 ```
 
 
-**Note**: If fails, try to execute: *terraform init -upgrade* on terminal and execute cmd: *terraform apply --auto-approve*
+> **Note**: If fails, try to execute: **terraform init -upgrade** on terminal and execute cmd: **terraform apply**
 
 # OnPrem side (i,e simulated local network)
-Goto (rdp login) on-prem (Local Server e.g: windows server 2022)
-- username: demousr
-- password: Password@123
+Goto (login) on-prem vm (Local Server e.g: windows server 2022)
+- username: `demousr`
+- password: `Password@123`
   
 → Goto Server Manager Dashboard.
-→ Drop down **Manage** on top right corner. click: Add roles→ Installation Type: Role-based or feature-based installation → click: Next → Remote Access → click: next → next → tick: DirectAccess and VPN (RAS), Routing → Install
+→ On top right corner drop down **Manage**. click: Add roles→ Installation Type: Role-based or feature-based installation → click: Next → Remote Access → click: next → next → tick: DirectAccess and VPN (RAS), Routing → Install.
 
-After installation the Roles → click on Flag (On top right corner) → Open the Getting Started Wizard → Choose: Deploy VPN only
+After installation the Roles → click on Flag (On top right corner) → Open the Getting Started Wizard → Choose: Deploy VPN only.
 
 ![](/pics/Routing-and-Remote-Access.png)
 
@@ -76,7 +77,7 @@ Finish → start service
 
 →Dail-Out Credentials (Optional) → Finish
 → Select: Azure Network Interface → Go to properties → click security → choose: Use preshared key for authentication → type: keyname (e.g: abc@143 (this key is from connections in Virtual Network Gateway))
-**Note**: In this terraform code Preshared Key is: abc@143
+> **Note**: In this terraform code Preshared Key is: abc@143
 
 ![](/pics/AzureProperties.png)
 
@@ -88,7 +89,7 @@ Goto → Virtuanl Network Gateway (VPN Gateway) → On left side click: connecti
 ![](/pics/VPNGW-connection.png)
 
 The update will take sometime.
-- Connect VM, open browser enter destination VM private ip to see Microsoft default page over S2S.
+- Connect VM, open browser enter destination VM private ip in url to see Microsoft default page over S2S.
 
 Links: 
 - [https://learn.microsoft.com/en-us/azure/vpn-gateway/tutorial-create-gateway-portal](https://learn.microsoft.com/en-us/azure/vpn-gateway/tutorial-create-gateway-portal)
