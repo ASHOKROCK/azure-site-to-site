@@ -1,13 +1,13 @@
 # Azure-site-to-site
 ## Scope
 Implement mulit-site S2S vpn.
-# Network diagram
+## Network
 ![diagram](/pics/NetworkDesign.png)
 ## Prerequsites
 - [terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 - [azure cli](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli) & [sign in](https://learn.microsoft.com/en-us/cli/azure/authenticate-azure-cli)
 
-This repo contains two spoke accounts (simulated on-prem network) with respective parameters.
+This repo contains two spoke Vnets (simulated on-prem network) with respective parameters.
 - spoke1 ([spoke1-Vnet.azcli](./On-prem/spoke1-Vnet.azcli))
 - spoke2 ([spoke1-Vnet.azcli](./On-prem/spoke1-Vnet.azcli))
 
@@ -46,13 +46,14 @@ This repo contains two spoke accounts (simulated on-prem network) with respectiv
 
 > **Note**: If fails, try to execute: **terraform init -upgrade** on terminal and execute cmd: **terraform apply**
 
-# OnPrem side (i,e simulated local network)
-- Goto (login) on-prem vm (Local Server e.g: windows server 2022).
+## OnPrem side (i,e simulated local network)
+
+- Goto (login) on-prem VM (local Server i,e windows server).
   - username: `demousr`
   - password: `Password@123`
   
-- In VM -> Goto Server Manager Dashboard.
-→ On top right corner drop down **Manage**. click: Add roles→ Installation Type: Role-based or feature-based installation → click: Next → Remote Access → click: next → next → tick: DirectAccess and VPN (RAS), Routing → Install.
+- In VM → Goto Server Manager Dashboard.
+→ On top right corner drop down **Manage**. click: Add roles → Installation Type: Role - based or feature - based installation → click: Next → Remote Access → click: next → next → tick: DirectAccess and VPN (RAS), Routing → Install.
 
 - After installating the Roles → click on Flag (On top right corner) → Open the Getting Started Wizard → Choose: Deploy VPN only.
 
@@ -88,7 +89,7 @@ Finish → start service.
 ![](/pics/connect.png)
 
 → Check the status in Azure: Connections under Virtual Network Gateway
-Goto → Virtuanl Network Gateway (VPN Gateway) → On left side click: connections.
+Goto → Virtuanl Network Gateway (VPN Gateway) → On left side click: **connections**.
 
 ![](/pics/VPNGW-connection.png)
 
