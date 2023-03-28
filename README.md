@@ -11,14 +11,18 @@ This repo contains two spoke accounts (simulated on-prem network) with respectiv
 - spoke1 ([spoke1-Vnet.azcli](./On-prem/spoke1-Vnet.azcli))
 - spoke2 ([spoke1-Vnet.azcli](./On-prem/spoke1-Vnet.azcli))
 
+## Implementation
 
-1. Create the spoke Vnets. execute below commands in terminal:
+### Create (on-prem) spokes
+
+1. Create two spoke Vnets. execute below commands in terminal:
    -  ./spoke1-Vnet.azcli
    -  ./spoke2-Vnet.azcli
 
 2. Navigate to your Virtual Machines for public ip's.
 3. Copy VM's (acts as network virtual appliance) public ip, required for VPN setup in later section.
-4. Clone this repo and change below parameters. 
+### Create Azure Vnet
+1. Clone [this](https://github.com/sree7k7/azure-site-to-site) repo and change below parameters. 
 > **Note**: Change the *spoke1_Vm_pip* and *spoke2_Vm_pip* (use vm ips copied from above steps)
 ```azcli
   resource_group_location = "northeurope"
@@ -32,7 +36,7 @@ This repo contains two spoke accounts (simulated on-prem network) with respectiv
   spoke1_Vm_pip = "87.49.45.xxx" 
   spoke2_Vm_pip = "87.49.45.xx"
 ```
-1. execute below cmds: (Goto dir: /site-to-site-terrafrom)
+2. execute below cmds: (Goto dir: /site-to-site-terrafrom)
   
 ```terraform
   terraform init
@@ -43,14 +47,14 @@ This repo contains two spoke accounts (simulated on-prem network) with respectiv
 > **Note**: If fails, try to execute: **terraform init -upgrade** on terminal and execute cmd: **terraform apply**
 
 # OnPrem side (i,e simulated local network)
-Goto (login) on-prem vm (Local Server e.g: windows server 2022)
-- username: `demousr`
-- password: `Password@123`
+- Goto (login) on-prem vm (Local Server e.g: windows server 2022).
+  - username: `demousr`
+  - password: `Password@123`
   
-→ Goto Server Manager Dashboard.
+- In VM -> Goto Server Manager Dashboard.
 → On top right corner drop down **Manage**. click: Add roles→ Installation Type: Role-based or feature-based installation → click: Next → Remote Access → click: next → next → tick: DirectAccess and VPN (RAS), Routing → Install.
 
-After installation the Roles → click on Flag (On top right corner) → Open the Getting Started Wizard → Choose: Deploy VPN only.
+- After installating the Roles → click on Flag (On top right corner) → Open the Getting Started Wizard → Choose: Deploy VPN only.
 
 ![](/pics/Routing-and-Remote-Access.png)
 
@@ -58,7 +62,7 @@ After installation the Roles → click on Flag (On top right corner) → Open th
 → next → Choose: Custom configuration → select: Demand-dial connections (used for branch office routing), LAN routing, VPN access.
 ![](/pics/Demand-dial-connections.png)
 
-Finish → start service
+Finish → start service.
 
 → click: computerName as shown in below pic.
 ![](/pics/Demand-dail-Interface.png)
@@ -71,7 +75,7 @@ Finish → start service
 
 ![](/pics/DestinationAddress.png)
 
-→ In Protocols and Security: Route IP packets on this interface → Next → Static Routes for Remote Networks → click: add → Destination: 10.0.0.0/16 (i,e cloud Vnet cidr), Network Mask: 255.255.0.0 → Metric: 16
+→ In Protocols and Security: Route IP packets on this interface → Next → Static Routes for Remote Networks → click: add → Destination: 10.0.0.0/16 (i,e cloud Vnet cidr), Network Mask: 255.255.0.0 → Metric: 16.
 ![](/pics/StaticRouteForRemoteNetworks.png)
 
 
