@@ -24,13 +24,16 @@ This repo contains two spoke Vnets (simulated on-prem network) in On-prem folder
 ### Create Azure Vnet
 1. Clone [this](https://github.com/sree7k7/azure-site-to-site) repo and change below parameters. 
 > **Note**: Change the *spoke1_Vm_pip* and *spoke2_Vm_pip* (use vm ips copied from above steps)
-```azcli
+
+```terraform
+  ## cloud
   resource_group_location = "northeurope"
   vnet_cidr = "10.6.0.0/16"
   public_subnet_address = "10.6.1.0/24"
   private_subnet_address = "10.6.2.0/24"
   gateway_subnet_address = "10.6.3.0/24"
-  # Simulated on-prem details
+
+  ## Simulated on-prem details
   spoke1cidr = "10.1.0.0/16" 
   spoke2cidr = "10.2.0.0/16"
   spoke1_Vm_pip = "87.49.45.xxx" 
