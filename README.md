@@ -23,7 +23,8 @@ This repo contains two spoke Vnets (simulated on-prem network) in On-prem folder
 3. Copy VM's (acts as network virtual appliance) public ip, required for VPN setup in later section.
 ### Create Azure Vnet
 1. Clone [this](https://github.com/sree7k7/azure-site-to-site) repo and change below parameters. 
-> **Note**: Change the *spoke1_Vm_pip* and *spoke2_Vm_pip* (use vm ips copied from above steps)
+
+**Note**: Change the *spoke1_Vm_pip* and *spoke2_Vm_pip* (use vm ips copied from above steps)
 
 ```terraform
   ## cloud
